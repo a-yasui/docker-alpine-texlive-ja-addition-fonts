@@ -7,8 +7,8 @@ from Paperist/docker-alpine-texlive-ja (under the MIT License).
 # Usage
 
 ```shell
-$ docker run --rm -it -v $PWD:/workdir a-yasui/alphine-texlive-ja
-
+$ docker pull atyasu/alpine-texlive-ja-addition-fonts:latest
+$ docker run --rm -it -v $PWD:/workdir atyasu/alpine-texlive-ja-addition-fonts /bin/sh
 ```
 
 # License
