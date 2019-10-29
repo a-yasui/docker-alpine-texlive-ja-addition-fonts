@@ -10,7 +10,7 @@ Forked from umireon/docker-texci (under the MIT License).
 
 ```shell
 $ docker pull atyasu/alpine-texlive-ja-addition-fonts:latest
-$ docker run --rm -it -v $PWD:/workdir atyasu/alpine-texlive-ja-addition-fonts /bin/sh
+$ docker run --rm -it -v $PWD:/workdir atyasu/alpine-texlive-ja-addition-fonts lualatex
 ```
 
 # License
