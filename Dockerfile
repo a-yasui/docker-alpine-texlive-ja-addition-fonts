@@ -21,7 +21,7 @@ RUN apk --no-cache add perl wget xz tar fontconfig-dev freetype-dev && \
     /tmp/install-tl-unx/install-tl \
       --profile=/tmp/install-tl-unx/texlive.profile \
       --repository http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2018/tlnet-final/ && \
-    tlmgr install \
+    /usr/local/texlive/2018/bin/x86_64-linux/tlmgr install \
       collection-basic collection-latex \
       collection-latexrecommended collection-latexextra \
       collection-fontsrecommended collection-langjapanese \
