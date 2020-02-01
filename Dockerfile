@@ -1,11 +1,13 @@
 # Released under the MIT license
 # https://opensource.org/licenses/MIT
+#
 
-FROM frolvlad/alpine-glibc
+FROM alpine:3.11
 
 MAINTAINER a-yasui
 
-ENV PATH /usr/local/texlive/2018/bin/x86_64-linux:$PATH
+ENV PATH /usr/local/texlive/2018/bin/x86_64-linuxmusl:$PATH
+ENV LANG=C.UTF-8
 
 WORKDIR /workdir
 
@@ -19,9 +21,10 @@ RUN apk --no-cache add perl wget xz tar fontconfig-dev freetype-dev && \
       "option_src 0" \
       > /tmp/install-tl-unx/texlive.profile && \
     /tmp/install-tl-unx/install-tl \
+      --no-gui \
       --profile=/tmp/install-tl-unx/texlive.profile \
       --repository http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2018/tlnet-final/ && \
-    /usr/local/texlive/2018/bin/x86_64-linux/tlmgr install \
+    tlmgr install \
       collection-basic collection-latex \
       collection-latexrecommended collection-latexextra \
       collection-fontsrecommended collection-langjapanese \
