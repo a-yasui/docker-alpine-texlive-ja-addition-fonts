@@ -29,20 +29,20 @@ RUN apk --no-cache add perl wget xz tar fontconfig-dev freetype-dev && \
     rm -fr /tmp/install-tl-unx && \
     apk --no-cache del xz tar
 
+COPY Hack-v3.003-ttf.zip .
+RUN unzip Hack-v3.003-ttf.zip && \
+  mkdir -p /usr/share/fonts && \
+  cp -R ttf /usr/share/fonts/Hackfont && \
+  rm -rf Hack-v3.003-ttf.zip ttf
 
-RUN wget -qO Hack-v3.003-ttf.zip https://github.com/source-foundry/Hack/releases/download/v3.003/Hack-v3.003-ttf.zip && \
-	unzip Hack-v3.003-ttf.zip && \
-	mkdir -p /usr/share/fonts && \
-	cp -R ttf /usr/share/fonts/Hackfont && \
-	rm -rf Hack-v3.003-ttf.zip ttf && \
-	wget -qO IPA.zip https://ipafont.ipa.go.jp/IPAfont/IPAfont00303.zip && \
-	unzip IPA.zip && \
-	cp -R IPAfont00303 /usr/share/fonts/IPA && \
-	rm -rf IPA.zip IPAfont00303 && \
-	fc-cache -fv
+COPY IPAfont00303.zip .
+RUN unzip IPAfont00303.zip && \
+  cp -R IPAfont00303 /usr/share/fonts/IPA && \
+  rm -rf IPAfont00303.zip IPAfont00303
 
 RUN apk --no-cache del wget
 
-RUN mktexlsr
+## Make Font Caches
+RUN fc-cache -fv && mktexlsr && luaotfload-tool -v -vvv -u
 
 CMD ["sh"]
