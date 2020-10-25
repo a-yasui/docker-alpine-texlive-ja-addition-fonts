@@ -6,14 +6,14 @@ FROM alpine:3.11
 
 MAINTAINER a-yasui
 
-ENV PATH /usr/local/texlive/2018/bin/x86_64-linuxmusl:$PATH
+ENV PATH /usr/local/texlive/2019/bin/x86_64-linuxmusl:$PATH
 ENV LANG=C.UTF-8
 
 WORKDIR /workdir
 
 RUN apk --no-cache add perl wget xz tar fontconfig-dev freetype-dev && \
     mkdir /tmp/install-tl-unx && \
-    wget -qO - http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2018/tlnet-final/install-tl-unx.tar.gz | \
+    wget -qO - http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2019/tlnet-final/install-tl-unx.tar.gz | \
     tar -xz -C /tmp/install-tl-unx --strip-components=1 && \
     printf "%s\n" \
       "selected_scheme scheme-basic" \
@@ -23,7 +23,7 @@ RUN apk --no-cache add perl wget xz tar fontconfig-dev freetype-dev && \
     /tmp/install-tl-unx/install-tl \
       --no-gui \
       --profile=/tmp/install-tl-unx/texlive.profile \
-      --repository http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2018/tlnet-final/ && \
+      --repository http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2019/tlnet-final/ && \
     tlmgr install \
       collection-basic collection-latex \
       collection-latexrecommended collection-latexextra \
@@ -38,10 +38,10 @@ RUN unzip Hack-v3.003-ttf.zip && \
   cp -R ttf /usr/share/fonts/Hackfont && \
   rm -rf Hack-v3.003-ttf.zip ttf
 
-COPY IPAfont00303.zip .
-RUN unzip IPAfont00303.zip && \
-  cp -R IPAfont00303 /usr/share/fonts/IPA && \
-  rm -rf IPAfont00303.zip IPAfont00303
+COPY IPAexfont00401.zip .
+RUN unzip IPAexfont00401.zip && \
+  cp -R IPAexfont00401 /usr/share/fonts/IPA && \
+  rm -rf IPAexfont00401.zip IPAexfont00401
 
 RUN apk --no-cache del wget
 
