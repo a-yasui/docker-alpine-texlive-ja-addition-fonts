@@ -6,14 +6,14 @@ FROM alpine:3.11
 
 MAINTAINER a-yasui
 
-ENV PATH /usr/local/texlive/2019/bin/x86_64-linuxmusl:$PATH
+ENV PATH /usr/local/texlive/2020/bin/x86_64-linuxmusl:$PATH
 ENV LANG=C.UTF-8
 
 WORKDIR /workdir
 
 RUN apk --no-cache add perl wget xz tar fontconfig-dev freetype-dev && \
     mkdir /tmp/install-tl-unx && \
-    wget -qO - http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2019/tlnet-final/install-tl-unx.tar.gz | \
+    wget -qO - http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2020/tlnet-final/install-tl-unx.tar.gz | \
     tar -xz -C /tmp/install-tl-unx --strip-components=1 && \
     printf "%s\n" \
       "selected_scheme scheme-basic" \
@@ -23,7 +23,7 @@ RUN apk --no-cache add perl wget xz tar fontconfig-dev freetype-dev && \
     /tmp/install-tl-unx/install-tl \
       --no-gui \
       --profile=/tmp/install-tl-unx/texlive.profile \
-      --repository http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2019/tlnet-final/ && \
+      --repository http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2020/tlnet-final/ && \
     tlmgr install \
       collection-basic collection-latex \
       collection-latexrecommended collection-latexextra \

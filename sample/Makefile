@@ -1,7 +1,7 @@
 
 all: hello-tate.pdf hello-yoko.pdf
 
-DOCKER_IMAGE := 5e18dea0fb52
+DOCKER_IMAGE := atyasu/alpine-texlive-ja-addition-fonts:year-2019
 hello-yoko.pdf:
 	docker run --rm -it -v $(abspath .):/workdir $(DOCKER_IMAGE) lualatex hello-yoko.tex
 hello-tate.pdf:
