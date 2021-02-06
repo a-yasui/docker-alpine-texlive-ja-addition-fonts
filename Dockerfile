@@ -2,18 +2,26 @@
 # https://opensource.org/licenses/MIT
 #
 
-FROM alpine:3.11
+FROM alpine:3.13
 
 MAINTAINER a-yasui
 
-ENV PATH /usr/local/texlive/2020/bin/x86_64-linuxmusl:$PATH
+ENV PATH /usr/local/texlive/2020/bin/x86_64-linux:/usr/local/texlive/2020/bin/x86_64-linuxmusl:$PATH
 ENV LANG=C.UTF-8
 
 WORKDIR /workdir
 
-RUN apk --no-cache add perl wget xz tar fontconfig-dev freetype-dev && \
-    mkdir /tmp/install-tl-unx && \
-    wget -qO - http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2020/tlnet-final/install-tl-unx.tar.gz | \
+## If Stable Release: Maybe, release date will be */04/20 cycle.
+### install-tl-unx.tar.gz : http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2020/tlnet-final/install-tl-unx.tar.gz
+### Repository : http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2020/
+##
+## If you use the Major version: Use to ctan link: http://mirror.ctan.org/systems/texlive/tlnet
+### install-tl-unx.tar.gz : http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+### Repository : http://mirror.ctan.org/systems/texlive/tlnet
+
+RUN apk --no-cache add perl wget xz tar fontconfig-dev freetype-dev
+RUN mkdir /tmp/install-tl-unx && \
+    wget -qO - http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | \
     tar -xz -C /tmp/install-tl-unx --strip-components=1 && \
     printf "%s\n" \
       "selected_scheme scheme-basic" \
@@ -23,7 +31,7 @@ RUN apk --no-cache add perl wget xz tar fontconfig-dev freetype-dev && \
     /tmp/install-tl-unx/install-tl \
       --no-gui \
       --profile=/tmp/install-tl-unx/texlive.profile \
-      --repository http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2020/tlnet-final/ && \
+      --repository http://mirror.ctan.org/systems/texlive/tlnet/ && \
     tlmgr install \
       collection-basic collection-latex \
       collection-latexrecommended collection-latexextra \
