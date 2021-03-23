@@ -6,7 +6,7 @@ FROM alpine:3.13
 
 MAINTAINER a-yasui
 
-ENV PATH /usr/local/texlive/2020/bin/x86_64-linux:/usr/local/texlive/2020/bin/x86_64-linuxmusl:$PATH
+ENV PATH /usr/local/texlive/2020/bin/x86_64-linux:/usr/local/texlive/2020/bin/x86_64-linuxmusl:/usr/local/texlive/2020/bin/aarch64-linux:$PATH
 ENV LANG=C.UTF-8
 
 WORKDIR /workdir
