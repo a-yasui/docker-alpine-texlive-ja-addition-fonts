@@ -1,5 +1,7 @@
 # a-yasui/docker-alpine-texlive-ja-addition-fonts
 
+**deprecated Repository** move : https://github.com/a-yasui/docker-texlive-ja-addition-fonts
+
 Minimal LuaLaTeX Live image for Japanese based on alpine.
 
 Forked from umireon/docker-texci (under the MIT License).
